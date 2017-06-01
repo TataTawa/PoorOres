@@ -26,7 +26,7 @@ configFile.withReader {
 }
 
 version = config.minecraft_version + "-" + config.mod_version
-group= "net.xexanos.poorores" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group="net.xexanos.poorores" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "PoorOres"
 
 minecraft {

@@ -1,5 +1,6 @@
 package net.xexanos.poorores;
 
+import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -132,7 +133,7 @@ public class PoorOre extends Block {
 
     public Block getBaseBlock() {
         if (baseBlock == null) {
-            if (setBaseBlock(Block.getBlockFromName(getModID() + ":" + getBaseBlockName())) == null) {
+            if (setBaseBlock(GameData.getBlockRegistry().getObject(getModID() + ":" + getBaseBlockName())) == null) {
                 LogHelper.error(getName() + ": Could not get baseBlock.");
             }
         }
@@ -211,12 +212,12 @@ public class PoorOre extends Block {
 
     @Override
     public int getHarvestLevel(int metadata) {
-        return getBaseBlock().getHarvestLevel(metadata);
+        return getBaseBlock().getHarvestLevel(this.baseBlockMeta);
     }
 
     @Override
     public String getHarvestTool(int metadata) {
-        return getBaseBlock().getHarvestTool(metadata);
+    	return getBaseBlock().getHarvestTool(this.baseBlockMeta);
     }
 
     @Override
@@ -244,7 +245,7 @@ public class PoorOre extends Block {
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-        for (ItemStack drops : baseBlock.getDrops(world, x, y, z, metadata, fortune)) {
+        for (ItemStack drops : baseBlock.getDrops(world, x, y, z, this.baseBlockMeta, fortune)) {
             if (drops.getItem() == Item.getItemFromBlock(baseBlock)) {
                 ret.add(new ItemStack(this, drops.stackSize));
             } else {
