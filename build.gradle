@@ -30,7 +30,7 @@ group="net.xexanos.poorores" // http://maven.apache.org/guides/mini/guide-naming
 archivesBaseName = "PoorOres"
 
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
+    version = config.forge_version + "-" + config.minecraft_version
 
     replaceIn "reference/Reference.java"
     replace "@VERSION@", "${config.minecraft_version}-${config.mod_version}"
